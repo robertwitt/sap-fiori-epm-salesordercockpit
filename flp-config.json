@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "de.robertwitt.demo.epm.salesordercockpit",
+        "description": "Sales Order Cockpit",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#SalesOrder-Display",
+        "navigationComponentName": "de.robertwitt.demo.epm.salesordercockpit",
+        "intentSemanticObject": "SalesOrder",
+        "intentAction": "Display",
+        "html5ApplicationName": "salesordercockpit",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "8af98359-ebd8-4ad4-8d22-e5f9fba82ac3-1547941390280"
+        ],
+        "contentPackages": [
+            "bada5e24-9318-404f-ba6a-65ed81f40705"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Sales Order Cockpit",
+        "subtitle": "",
+        "searchKeywords": "Sales Order Cockpit,",
+        "displayIconUrl": "sap-icon://sales-order",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}
