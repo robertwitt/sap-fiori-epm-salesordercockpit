@@ -41,12 +41,12 @@
       "description": "SAPUI5 Test Resources"
     },
     {
-      "path": "/DemoES5",
+      "path": "/sap/opu/odata/iwbep/GWSAMPLE_BASIC",
       "target": {
         "type": "destination",
-        "name": "DemoES5"
+        "name": "DemoES5_GWSample"
       },
-      "description": "Demo - ES5"
+      "description": "Demo - ES5 - Gateway Sample"
     }
   ],
   "welcomeFile": "/webapp/test/flpSandbox.html",
