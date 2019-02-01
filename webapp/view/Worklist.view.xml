@@ -1,66 +1,67 @@
 <mvc:View controllerName="de.robertwitt.demo.epm.salesordercockpit.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
-		<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}"/>
-		</semantic:titleHeading>
 		<semantic:content>
-			<Table id="table" width="auto" items="{ path: '/SalesOrderSet', sorter: { path: 'SalesOrderID', descending: false } }"
-				noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
-				updateFinished="onUpdateFinished">
-				<headerToolbar>
-					<Toolbar>
-						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
-						<ToolbarSpacer/>
-						<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search="onSearch" width="auto"></SearchField>
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableCustomerColumnTitle}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableLifecycleStatusColumnTitle}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableDeliveryStatusColumnTitle}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableBillingStatusColumnTitle}"/>
-					</Column>
-					<Column>
-						<Text text="{i18n>tableChangedAtColumnTitle}"/>
-					</Column>
-					<Column id="unitNumberColumn" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
-					</Column>
-				</columns>
+			<IconTabBar id="filterTabBar" backgroundDesign="Transparent" expandable="false" select="onFilterTabBarSelect"
+				class="sapUiResponsiveContentPadding">
 				<items>
-					<ColumnListItem type="Navigation" press="onPress">
-						<cells>
-							<ObjectIdentifier title="{SalesOrderID}"/>
-							<Text text="{CustomerName}"/>
-							<Text text="{LifecycleStatusDescription}"/>
-							<Text text="{BillingStatusDescription}"/>
-							<Text text="{DeliveryStatusDescription}"/>
-							<Text text="{path: 'ChangedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
-							<ObjectNumber number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
-						</cells>
-					</ColumnListItem>
+					<IconTabFilter icon="sap-icon://sales-order" text="{i18n>allFilterText}"/>
+					<IconTabSeparator/>
+					<IconTabFilter icon="sap-icon://status-error" iconColor="Negative" key="N" text="{i18n>newFilterText}"/>
+					<IconTabFilter icon="sap-icon://status-in-process" iconColor="Critical" key="P" text="{i18n>inProgressFilterText}"/>
+					<IconTabFilter icon="sap-icon://status-completed" iconColor="Positive" key="C" text="{i18n>closedFilterText}"/>
+					<IconTabFilter icon="sap-icon://status-inactive" iconColor="Neutral" key="X" text="{i18n>canceledFilterText}"/>
 				</items>
-			</Table>
+				<content>
+					<Table id="table" width="auto" items="{ path: '/SalesOrderSet', sorter: { path: 'SalesOrderID', descending: false } }"
+						noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
+						updateFinished="onUpdateFinished">
+						<headerToolbar>
+							<Toolbar>
+								<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
+								<ToolbarSpacer/>
+								<SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search="onSearch" width="auto"></SearchField>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column id="nameColumn">
+								<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableCustomerColumnTitle}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableLifecycleStatusColumnTitle}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableDeliveryStatusColumnTitle}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableBillingStatusColumnTitle}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>tableChangedAtColumnTitle}"/>
+							</Column>
+							<Column id="unitNumberColumn" hAlign="End">
+								<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press="onPress">
+								<cells>
+									<ObjectIdentifier title="{SalesOrderID}"/>
+									<Text text="{CustomerName}"/>
+									<Text text="{LifecycleStatusDescription}"/>
+									<Text text="{BillingStatusDescription}"/>
+									<Text text="{DeliveryStatusDescription}"/>
+									<Text text="{path: 'ChangedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
+									<ObjectNumber number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</IconTabBar>
 		</semantic:content>
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id="shareTile" title="{worklistView>/saveAsTileTitle}"/>
-		</semantic:saveAsTileAction>
 	</semantic:SemanticPage>
 </mvc:View>
