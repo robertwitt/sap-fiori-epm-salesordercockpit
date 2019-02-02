@@ -1,43 +1,26 @@
-<mvc:View
-	controllerName="de.robertwitt.demo.epm.salesordercockpit.controller.Object"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
-
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false"
-		busy="{objectView>/busy}"
+<mvc:View controllerName="de.robertwitt.demo.epm.salesordercockpit.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
-
-		<semantic:titleHeading>
-			<Title text="{SalesOrderID}" />
-		</semantic:titleHeading>
-
 		<semantic:headerContent>
-			<ObjectNumber
-				number="{
-					path: 'GrossAmount',
-					formatter: '.formatter.numberUnit'
-				}"
-				numberUnit="{CurrencyCode}"
-			/>
+			<ObjectHeader title="{CustomerName}" number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" numberUnit="{CurrencyCode}"
+				intro="{SalesOrderID}">
+				<attributes>
+					<ObjectAttribute text="{Note}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus text="{LifecycleStatusDescription}" state="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusValueState' }" icon="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusIcon' }"/>
+				</statuses>
+			</ObjectHeader>
 		</semantic:headerContent>
-
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
-
 		<semantic:shareInJamAction>
 			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
 		</semantic:shareInJamAction>
-
 		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
+			<footerbar:AddBookmarkButton id="shareTile" title="{objectView>/saveAsTileTitle}"/>
 		</semantic:saveAsTileAction>
-
 	</semantic:SemanticPage>
-
 </mvc:View>
