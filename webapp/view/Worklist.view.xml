@@ -2,7 +2,7 @@
 	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 		<semantic:content>
-			<IconTabBar id="filterTabBar" headerBackgroundDesign="Transparent" expandable="false" select="onFilterTabBarSelect"
+			<IconTabBar id="filterTabBar" headerBackgroundDesign="Translucent" expandable="false" select="onFilterTabBarSelect"
 				class="sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter icon="sap-icon://sales-order" key=" " text="{i18n>allFilterText}"/>
