@@ -62,6 +62,40 @@ sap.ui.define([
 			oShareDialog.open();
 		},
 
+		/**
+		 * Event handler of goods issue button. Performs the goods issue for
+		 * the bound sales order object.
+		 * @public
+		 */
+		onGoodsIssuePressed: function () {
+			this._processSalesOrder("/SalesOrder_GoodsIssueCreated", this.getResourceBundle().getText("goodsIssueMessage"));
+		},
+
+		/**
+		 * Event handler of invoice button. Creates the invoice for the bound
+		 * sales order object.
+		 * @public
+		 */
+		onInvoicePressed: function () {
+			this._processSalesOrder("/SalesOrder_InvoiceCreated", this.getResourceBundle().getText("invoiceMessage"));
+		},
+
+		/**
+		 * Event handler of confirm button. Closes the bound sales order object.
+		 * @public
+		 */
+		onConfirmPressed: function () {
+			this._processSalesOrder("/SalesOrder_Confirm", this.getResourceBundle().getText("confirmMessage"));
+		},
+
+		/**
+		 * Event handler of cancel button. Cancels the bound sales order object.
+		 * @public
+		 */
+		onCancelPressed: function () {
+			this._processSalesOrder("/SalesOrder_Cancel", this.getResourceBundle().getText("cancelMessage"));
+		},
+
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -145,6 +179,32 @@ sap.ui.define([
 				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+		},
+
+		/**
+		 * Calls a function import of the OData model and displays 
+		 * specified message if successful.
+		 * @private
+		 * @param {string} sFunctionName name of a function import
+		 * @param {string} sSuccessMessage text to be displayed as toast in success case
+		 */
+		_processSalesOrder: function (sFunctionName, sSuccessMessage) {
+			var oViewModel = this.getModel("objectView");
+			oViewModel.setProperty("/busy", true);
+			var sSalesOrderId = this.getView().getBindingContext().getObject().SalesOrderID;
+			this.getModel().callFunction(sFunctionName, {
+				method: "POST",
+				urlParameters: {
+					SalesOrderID: sSalesOrderId
+				},
+				success: function () {
+					oViewModel.setProperty("/busy", false);
+					sap.m.MessageToast.show(sSuccessMessage);
+				},
+				error: function () {
+					oViewModel.setProperty("/busy", false);
+				}
+			});
 		}
 
 	});

@@ -72,9 +72,8 @@ sap.ui.define([
 		 * @returns {boolean} true if goods issue is possible
 		 */
 		goodsIssuePossible: function (sLifecycleStatus, sDeliveryStatus) {
-			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed &&
-				sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled &&
-				sDeliveryStatus !== constants.salesOrder.deliveryStatus.delivered;
+			return sLifecycleStatus === constants.salesOrder.lifecycleStatus.inProgress && sDeliveryStatus !== constants.salesOrder.deliveryStatus
+				.delivered;
 		},
 
 		/**
@@ -82,12 +81,13 @@ sap.ui.define([
 		 * status and delivery status
 		 * @public
 		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @param {string} sDeliveryStatus a sales order's delivery status
 		 * @param {string} sBillingStatus a sales order's billing status
 		 * @returns {boolean} true if invoicing is possible
 		 */
-		invoicePossible: function (sLifecycleStatus, sBillingStatus) {
-			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed &&
-				sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled &&
+		invoicePossible: function (sLifecycleStatus, sDeliveryStatus, sBillingStatus) {
+			return sLifecycleStatus === constants.salesOrder.lifecycleStatus.inProgress &&
+				sDeliveryStatus === constants.salesOrder.deliveryStatus.delivered &&
 				sBillingStatus !== constants.salesOrder.billingStatus.paid;
 		},
 
@@ -98,17 +98,19 @@ sap.ui.define([
 		 * @returns {boolean} true if confirmation is possible
 		 */
 		confirmPossible: function (sLifecycleStatus) {
-			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed && sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled;
+			return sLifecycleStatus === constants.salesOrder.lifecycleStatus.new;
 		},
 
 		/**
 		 * Returns true if a sales order with specified lifecycle status can be cancelled
 		 * @public
 		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @param {string} sDeliveryStatus a sales order's delivery status
 		 * @returns {boolean} true if cancellation is possible
 		 */
-		confirmPossible: function (sLifecycleStatus) {
-			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed && sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled;
+		cancelPossible: function (sLifecycleStatus, sDeliveryStatus) {
+			return sLifecycleStatus === constants.salesOrder.lifecycleStatus.inProgress && sDeliveryStatus !== constants.salesOrder.deliveryStatus
+				.delivered;
 		}
 
 	};

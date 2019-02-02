@@ -10,11 +10,11 @@
 							<ObjectPageHeaderActionButton icon="sap-icon://shipping-status" tooltip="{i18n>goodsIssueActionTooltip}" type="Emphasized"
 								visible="{ parts: ['LifecycleStatus', 'DeliveryStatus'], formatter: '.formatter.goodsIssuePossible' }" press="onGoodsIssuePressed"/>
 							<ObjectPageHeaderActionButton icon="sap-icon://receipt" tooltip="{i18n>invoiceActionTooltip}" type="Emphasized"
-								visible="{ parts: ['LifecycleStatus', 'BillingStatus'], formatter: '.formatter.invoicePossible' }" press="onInvoicePressed"/>
+								visible="{ parts: ['LifecycleStatus', 'DeliveryStatus', 'BillingStatus'], formatter: '.formatter.invoicePossible' }" press="onInvoicePressed"/>
 							<ObjectPageHeaderActionButton icon="sap-icon://accept" tooltip="{i18n>confirmActionTooltip}" type="Accept"
 								visible="{ path: 'LifecycleStatus', formatter: '.formatter.confirmPossible' }" press="onConfirmPressed"/>
 							<ObjectPageHeaderActionButton icon="sap-icon://decline" tooltip="{i18n>cancelActionTooltip}" type="Reject"
-								visible="{ path: 'LifecycleStatus', formatter: '.formatter.confirmPossible' }" press="onCancelPressed"/>
+								visible="{ parts: ['LifecycleStatus', 'DeliveryStatus'], formatter: '.formatter.cancelPossible' }" press="onCancelPressed"/>
 						</actions>
 					</ObjectPageHeader>
 				</headerTitle>
