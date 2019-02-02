@@ -42,6 +42,47 @@
 						<m:ObjectNumber number="{ path: 'TaxAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
 					</layout:VerticalLayout>
 				</headerContent>
+				<sections>
+					<ObjectPageSection title="{i18n>itemsSectionTitle}">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<m:Table items="{ path: 'ToLineItems', parameters: { expand: 'ToProduct' } }" noDataText="{i18n>itemsTableNoDataText}" width="auto">
+										<m:columns>
+											<m:Column width="15%">
+												<m:Text text="{i18n>tableItemIdColumnTitle}"/>
+											</m:Column>
+											<m:Column>
+												<m:Text text="{i18n>tableProductColumnTitle}"/>
+											</m:Column>
+											<m:Column width="15%">
+												<m:Text text="{i18n>tableDeliveryDateColumnTitle}"/>
+											</m:Column>
+											<m:Column hAlign="End" width="20%">
+												<m:Text text="{i18n>tableQuantityColumnTitle}"/>
+											</m:Column>
+											<m:Column hAlign="End" width="20%">
+												<m:Text text="{i18n>tableGrossAmountColumnTitle}"/>
+											</m:Column>
+										</m:columns>
+										<m:items>
+											<m:ColumnListItem type="Inactive">
+												<m:cells>
+													<m:ObjectIdentifier
+														title="{ path: 'ItemPosition', type: 'sap.ui.model.odata.type.String', constraints: { isDigitSequence: true, maxLength: 10 } }"/>
+													<m:ObjectIdentifier title="{ProductID}" text="{ToProduct/Name}"/>
+													<m:Text text="{ path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
+													<m:ObjectNumber number="{ path: 'Quantity', formatter: '.formatter.numberUnit' }" unit="{QuantityUnit}"/>
+													<m:ObjectNumber number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+												</m:cells>
+											</m:ColumnListItem>
+										</m:items>
+									</m:Table>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
 			</ObjectPageLayout>
 		</semantic:content>
 		<semantic:sendEmailAction>
