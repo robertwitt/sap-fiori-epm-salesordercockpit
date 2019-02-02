@@ -5,7 +5,7 @@
 			<IconTabBar id="filterTabBar" backgroundDesign="Transparent" expandable="false" select="onFilterTabBarSelect"
 				class="sapUiResponsiveContentPadding">
 				<items>
-					<IconTabFilter icon="sap-icon://sales-order" text="{i18n>allFilterText}"/>
+					<IconTabFilter icon="sap-icon://sales-order" key=" " text="{i18n>allFilterText}"/>
 					<IconTabSeparator/>
 					<IconTabFilter icon="sap-icon://status-error" iconColor="Negative" key="N" text="{i18n>newFilterText}"/>
 					<IconTabFilter icon="sap-icon://status-in-process" iconColor="Critical" key="P" text="{i18n>inProgressFilterText}"/>

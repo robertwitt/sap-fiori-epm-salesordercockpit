@@ -6,6 +6,7 @@ sap.ui.define([], function () {
 		salesOrder: {
 
 			lifecycleStatus: {
+				none: " ",
 				new: "N",
 				inProgress: "P",
 				closed: "C",
