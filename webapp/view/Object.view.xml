@@ -1,18 +1,49 @@
-<mvc:View controllerName="de.robertwitt.demo.epm.salesordercockpit.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+<mvc:View controllerName="de.robertwitt.demo.epm.salesordercockpit.controller.Object" xmlns="sap.uxap" xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
-		<semantic:headerContent>
-			<ObjectHeader title="{CustomerName}" number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" numberUnit="{CurrencyCode}"
-				intro="{SalesOrderID}">
-				<attributes>
-					<ObjectAttribute text="{Note}"/>
-				</attributes>
-				<statuses>
-					<ObjectStatus text="{LifecycleStatusDescription}" state="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusValueState' }" icon="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusIcon' }"/>
-				</statuses>
-			</ObjectHeader>
-		</semantic:headerContent>
+		<semantic:content>
+			<ObjectPageLayout>
+				<headerTitle>
+					<ObjectPageHeader objectTitle="{CustomerName}" objectSubtitle="{Note}"/>
+				</headerTitle>
+				<headerContent>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>lifecycleStatusLabel}"/>
+						<m:ObjectStatus text="{LifecycleStatusDescription}" state="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusValueState' }"
+							icon="{ path: 'LifecycleStatus', formatter: '.formatter.objectStatusIcon' }"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>deliveryStatusLabel}"/>
+						<m:ObjectStatus text="{DeliveryStatusDescription}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>billingStatusLabel}"/>
+						<m:ObjectStatus text="{BillingStatusDescription}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>createdAtLabel}"/>
+						<m:ObjectStatus text="{ path: 'CreatedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>changedAtLabel}"/>
+						<m:ObjectStatus text="{ path: 'ChangedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>GrossAmountLabel}"/>
+						<m:ObjectNumber number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>netAmountLabel}"/>
+						<m:ObjectNumber number="{ path: 'NetAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label text="{i18n>taxAmountLabel}"/>
+						<m:ObjectNumber number="{ path: 'TaxAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
+					</layout:VerticalLayout>
+				</headerContent>
+			</ObjectPageLayout>
+		</semantic:content>
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
