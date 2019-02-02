@@ -115,7 +115,13 @@ sap.ui.define([
 				});
 			oShareDialog.open();
 		},
-		
+
+		/**
+		 * Event handler for search event. Adds a filter to the table's list
+		 * binding, filtering by sales order ID or customer name.
+		 * @param {sap.ui.base.Event} oEvent the search field's search event
+		 * @public 
+		 */
 		onSearch: function (oEvent) {
 			if (oEvent.getParameters().refreshButtonPressed) {
 				// Search field's 'refresh' button has been pressed.
@@ -128,7 +134,13 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery && sQuery.length > 0) {
-					aTableSearchState = [new Filter("SalesOrderID", FilterOperator.Contains, sQuery)];
+					aTableSearchState = [new Filter({
+						filters: [
+							new Filter("SalesOrderID", FilterOperator.Contains, sQuery),
+							new Filter("CustomerName", FilterOperator.Contains, sQuery)
+						],
+						and: false
+					})];
 				}
 				this._applySearch(aTableSearchState);
 			}
@@ -143,7 +155,7 @@ sap.ui.define([
 			var oTable = this.byId("table");
 			oTable.getBinding("items").refresh();
 		},
-		
+
 		/**
 		 * Event handler for icon tab bar selet event. Adds a filter
 		 * to the table's list binding by lifecycle status of the order.
