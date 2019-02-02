@@ -14,7 +14,12 @@ sap.ui.define([
 				if (!sValue) {
 					return "";
 				}
-				return parseFloat(sValue).toFixed(2);
+				// return parseFloat(sValue).toFixed(2);
+				var oNumberFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
+					minFractionDigits: 2,
+					maxFractionDigits: 2
+				});
+				return oNumberFormat.format(sValue);
 			}
 
 		};

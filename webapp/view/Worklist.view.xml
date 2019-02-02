@@ -13,7 +13,7 @@
 					<IconTabFilter icon="sap-icon://status-inactive" iconColor="Neutral" key="X" text="{i18n>canceledFilterText}"/>
 				</items>
 				<content>
-					<Table id="table" width="auto" items="{ path: '/SalesOrderSet', sorter: { path: 'SalesOrderID', descending: false } }"
+					<Table id="table" width="auto" items="{ path: '/SalesOrderSet', sorter: { path: 'ChangedAt', descending: true } }"
 						noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
 						updateFinished="onUpdateFinished">
 						<headerToolbar>
@@ -24,25 +24,25 @@
 							</Toolbar>
 						</headerToolbar>
 						<columns>
-							<Column id="nameColumn">
+							<Column id="nameColumn" width="12%">
 								<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
 							</Column>
 							<Column>
 								<Text text="{i18n>tableCustomerColumnTitle}"/>
 							</Column>
-							<Column>
+							<Column width="12%">
 								<Text text="{i18n>tableLifecycleStatusColumnTitle}"/>
 							</Column>
-							<Column>
+							<Column width="12%">
 								<Text text="{i18n>tableDeliveryStatusColumnTitle}"/>
 							</Column>
-							<Column>
+							<Column width="12%">
 								<Text text="{i18n>tableBillingStatusColumnTitle}"/>
 							</Column>
-							<Column>
+							<Column width="12%">
 								<Text text="{i18n>tableChangedAtColumnTitle}"/>
 							</Column>
-							<Column id="unitNumberColumn" hAlign="End">
+							<Column id="unitNumberColumn" hAlign="End" width="12%">
 								<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 							</Column>
 						</columns>
