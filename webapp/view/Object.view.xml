@@ -47,7 +47,7 @@
 						<subSections>
 							<ObjectPageSubSection>
 								<blocks>
-									<m:Table items="{ path: 'ToLineItems', parameters: { expand: 'ToProduct' } }" noDataText="{i18n>itemsTableNoDataText}" width="auto">
+									<m:Table items="{ToLineItems}" noDataText="{i18n>itemsTableNoDataText}" width="auto">
 										<m:columns>
 											<m:Column width="15%">
 												<m:Text text="{i18n>tableItemIdColumnTitle}"/>
