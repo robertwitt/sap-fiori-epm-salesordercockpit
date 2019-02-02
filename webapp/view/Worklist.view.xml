@@ -52,8 +52,8 @@
 									<ObjectIdentifier title="{SalesOrderID}"/>
 									<Text text="{CustomerName}"/>
 									<Text text="{LifecycleStatusDescription}"/>
-									<Text text="{BillingStatusDescription}"/>
 									<Text text="{DeliveryStatusDescription}"/>
+									<Text text="{BillingStatusDescription}"/>
 									<Text text="{path: 'ChangedAt', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' } }"/>
 									<ObjectNumber number="{ path: 'GrossAmount', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
 								</cells>
