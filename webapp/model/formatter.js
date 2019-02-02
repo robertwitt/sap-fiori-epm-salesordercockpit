@@ -22,7 +22,7 @@ sap.ui.define([
 			});
 			return oNumberFormat.format(sValue);
 		},
-		
+
 		/**
 		 * Returns the value state based on a sales order's lifecycle status
 		 * @public
@@ -31,17 +31,17 @@ sap.ui.define([
 		 */
 		objectStatusValueState: function (sLifecycleStatus) {
 			switch (sLifecycleStatus) {
-				case constants.salesOrder.lifecycleStatus.new:
-					return sap.ui.core.ValueState.Error;
-				case constants.salesOrder.lifecycleStatus.inProgress:
-					return sap.ui.core.ValueState.Warning;
-				case constants.salesOrder.lifecycleStatus.closed:
-					return sap.ui.core.ValueState.Success;
-				default:
-					return sap.ui.core.ValueState.None;
+			case constants.salesOrder.lifecycleStatus.new:
+				return sap.ui.core.ValueState.Error;
+			case constants.salesOrder.lifecycleStatus.inProgress:
+				return sap.ui.core.ValueState.Warning;
+			case constants.salesOrder.lifecycleStatus.closed:
+				return sap.ui.core.ValueState.Success;
+			default:
+				return sap.ui.core.ValueState.None;
 			}
 		},
-		
+
 		/**
 		 * Returns an icon URI based on a sales order's lifecycle status
 		 * @public
@@ -50,17 +50,65 @@ sap.ui.define([
 		 */
 		objectStatusIcon: function (sLifecycleStatus) {
 			switch (sLifecycleStatus) {
-				case constants.salesOrder.lifecycleStatus.new:
-					return "sap-icon://status-error";
-				case constants.salesOrder.lifecycleStatus.inProgress:
-					return "sap-icon://status-in-process";
-				case constants.salesOrder.lifecycleStatus.closed:
-					return "sap-icon://status-completed";
-				case constants.salesOrder.lifecycleStatus.canceled:
-					return "sap-icon://status-inactive";
-				default:
-					return "sap-icon://sales-order";
+			case constants.salesOrder.lifecycleStatus.new:
+				return "sap-icon://status-error";
+			case constants.salesOrder.lifecycleStatus.inProgress:
+				return "sap-icon://status-in-process";
+			case constants.salesOrder.lifecycleStatus.closed:
+				return "sap-icon://status-completed";
+			case constants.salesOrder.lifecycleStatus.canceled:
+				return "sap-icon://status-inactive";
+			default:
+				return "sap-icon://sales-order";
 			}
+		},
+
+		/**
+		 * Returns true if the goods issue is possible for specified lifecycle
+		 * status and delivery status
+		 * @public
+		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @param {string} sDeliveryStatus a sales order's delivery status
+		 * @returns {boolean} true if goods issue is possible
+		 */
+		goodsIssuePossible: function (sLifecycleStatus, sDeliveryStatus) {
+			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed &&
+				sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled &&
+				sDeliveryStatus !== constants.salesOrder.deliveryStatus.delivered;
+		},
+
+		/**
+		 * Returns true if the invoice can be created for specified lifecycle
+		 * status and delivery status
+		 * @public
+		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @param {string} sBillingStatus a sales order's billing status
+		 * @returns {boolean} true if invoicing is possible
+		 */
+		invoicePossible: function (sLifecycleStatus, sBillingStatus) {
+			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed &&
+				sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled &&
+				sBillingStatus !== constants.salesOrder.billingStatus.paid;
+		},
+
+		/**
+		 * Returns true if a sales order with specified lifecycle status can be confirmed
+		 * @public
+		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @returns {boolean} true if confirmation is possible
+		 */
+		confirmPossible: function (sLifecycleStatus) {
+			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed && sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled;
+		},
+
+		/**
+		 * Returns true if a sales order with specified lifecycle status can be cancelled
+		 * @public
+		 * @param {string} sLifecycleStatus a sales order's lifecycle status
+		 * @returns {boolean} true if cancellation is possible
+		 */
+		confirmPossible: function (sLifecycleStatus) {
+			return sLifecycleStatus !== constants.salesOrder.lifecycleStatus.closed && sLifecycleStatus !== constants.salesOrder.lifecycleStatus.canceled;
 		}
 
 	};

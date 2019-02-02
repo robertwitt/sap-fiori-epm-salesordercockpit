@@ -11,6 +11,16 @@ sap.ui.define([], function () {
 				inProgress: "P",
 				closed: "C",
 				canceled: "X"
+			},
+			
+			deliveryStatus: {
+				initial: "",
+				delivered: "D"
+			},
+			
+			billingStatus: {
+				initial: "",
+				paid: "P"
 			}
 
 		}
